@@ -25,22 +25,22 @@ $vertical_thumbnail = drile_get_theme_options('ts_prod_thumbnails_style') == 've
 
 	<?php
 		if( $vertical_thumbnail ){
-			do_action( 'woocommerce_product_thumbnails' ); 
+			do_action( 'woocommerce_product_thumbnails' );
 		}
-		
+
 		if( drile_get_theme_options('ts_prod_thumbnail_layout') == 'default' ){
 			echo '<div class="images">';
-		
+
 			do_action('drile_before_product_image');
-			
+
 			$emersya_id = get_post_meta( get_the_ID(), 'emersya_id', true );
-			
+
 			if ( !empty($emersya_id)) {
-				$html = "<div class='threedviewer'><iframe src='https://emersya.com/showcase/${emersya_id}' width='100%' height='500px' frameborder=0 allow='camera; gyroscope; accelerometer; magnetometer;' allowfullscreen allowtransparency='true' > </iframe></div>";
-				
+				$html = "<div class='threedviewer'><iframe src='https://emersya.com/showcase/${emersya_id}' width='100%' height='100%' frameborder=0 allow='camera; gyroscope; accelerometer; magnetometer;' allowfullscreen allowtransparency='true' > </iframe></div>";
+
 			}
 			elseif ( has_post_thumbnail() ) {
-				
+
 				$post_thumbnail_id = get_post_thumbnail_id( $post->ID );
 				$full_size_image   = wp_get_attachment_image_src( $post_thumbnail_id, 'full' );
 				$attributes = array(
@@ -69,16 +69,16 @@ $vertical_thumbnail = drile_get_theme_options('ts_prod_thumbnails_style') == 've
 				$html .= sprintf( '<img src="%s" alt="%s" class="wp-post-image" />', esc_url( wc_placeholder_img_src() ), esc_html__( 'Awaiting product image', 'drile' ) );
 				$html .= '</div>';
 			}
-			
+
 			echo apply_filters( 'woocommerce_single_product_image_thumbnail_html', $html, get_post_thumbnail_id( $post->ID ) );
-			
+
 			echo '</div>';
 		}
 	?>
 
-	<?php 
+	<?php
 	if( !$vertical_thumbnail ){
-		do_action( 'woocommerce_product_thumbnails' ); 
+		do_action( 'woocommerce_product_thumbnails' );
 	}
 	?>
 
